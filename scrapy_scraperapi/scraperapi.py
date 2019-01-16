@@ -19,6 +19,7 @@
 # THE SOFTWARE.
 
 import urllib
+import urllib.parse
 import logging
 
 log = logging.getLogger('scrapy.scraperapi')
@@ -40,7 +41,7 @@ class ScraperApiProxy(object):
         #Override request url
         if self.scraperapi_url not in request.url: 
             k_name = 'token' if ('proxycrawl' in self.scraperapi_url) else 'key'
-            new_url = 'https://%s/?%s=%s&url=%s' % (self.scraperapi_url, k_name, self.scraperapi_key, urllib.quote(request.url))
+            new_url = 'https://%s/?%s=%s&url=%s' % (self.scraperapi_url, k_name, self.scraperapi_key, urllib.parse.quote(request.url))
             log.debug('Using Scraper API, overridden URL is: %s' % (new_url))
             return request.replace(url=new_url)
         
