@@ -30,6 +30,7 @@ class ScraperApiProxy(object):
         self.scraperapi_url = settings.get('SCRAPERAPI_URL', 'api.scraperapi.com')
         self.scraperapi_key = settings.get('SCRAPERAPI_KEY')
         self.country_code = settings.get('COUNTRY_CODE', 'us')
+        self.keep_headers = settings.get('KEEP_HEADERS', True)
 
     @classmethod
     def from_crawler(cls, crawler):
@@ -42,7 +43,7 @@ class ScraperApiProxy(object):
         #Override request url
         if self.scraperapi_url not in request.url:
             k_name = 'token' if ('proxycrawl' in self.scraperapi_url) else 'key'
-            new_url = 'https://%s/?%s=%s&url=%s&country_code=%s' % (self.scraperapi_url, k_name, self.scraperapi_key, urllib.parse.quote(request.url), self.country_code)
+            new_url = 'https://%s/?%s=%s&url=%s&country_code=%s&keep_headers=%s' % (self.scraperapi_url, k_name, self.scraperapi_key, urllib.parse.quote(request.url), self.country_code, self.keep_headers)
             log.debug('Using Scraper API, overridden URL is: %s' % (new_url))
             return request.replace(url=new_url)
         
