@@ -31,7 +31,7 @@ class ScraperApiProxy(object):
         self.scraperapi_key = settings.get('SCRAPERAPI_KEY')
         self.country_code = settings.get('COUNTRY_CODE', 'us')
         self.keep_headers = settings.get('KEEP_HEADERS', 'true')
-        self.premium = settings.get('PREMIUM', false)
+        self.premium = settings.get('PREMIUM', 'false')
 
     @classmethod
     def from_crawler(cls, crawler):
