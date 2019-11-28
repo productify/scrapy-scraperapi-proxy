@@ -38,7 +38,7 @@ class ScraperApiProxy(object):
         return cls(crawler.settings)
 
     def process_request(self, request, spider):
-        if not self.scraperapi_ena or self.country_code == 'us':
+        if not self.scraperapi_ena:
             log.warning("Skipping Scraper API CALL(disabled)!")
             return
         #Override request url
